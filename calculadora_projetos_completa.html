@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Projetos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+    .calculadora {
+      flex: 1;
+      min-width: 260px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      width: 100%;
+    }
+    .resultado {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+    h2 {
+      text-align: center;
+    }
+    .info {
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculadora">
+    <h2>Incentivo</h2>
+    <div class="info">72,8% Próprio / 27,2% Terceiro</div>
+    <label for="valorIncentivo">Valor Total (R$):</label>
+    <input type="number" id="valorIncentivo" placeholder="Ex: 10000">
+    <button onclick="calcular('incentivo')">Calcular</button>
+    <div class="resultado" id="resultadoIncentivo"></div>
+  </div>
+
+  <div class="calculadora">
+    <h2>Agronordeste II</h2>
+    <div class="info">75,64% Próprio / 24,36% Terceiro</div>
+    <label for="valorAgro">Valor Total (R$):</label>
+    <input type="number" id="valorAgro" placeholder="Ex: 10800">
+    <button onclick="calcular('agro')">Calcular</button>
+    <div class="resultado" id="resultadoAgro"></div>
+  </div>
+
+  <div class="calculadora">
+    <h2>Mais ATeG</h2>
+    <div class="info">60% Próprio / 40% Terceiro</div>
+    <label for="valorAteg">Valor Total (R$):</label>
+    <input type="number" id="valorAteg" placeholder="Ex: 10000">
+    <button onclick="calcular('ateg')">Calcular</button>
+    <div class="resultado" id="resultadoAteg"></div>
+  </div>
+
+  <div class="calculadora">
+    <h2>Parceria 1</h2>
+    <div class="info">50% Próprio / 50% Terceiro</div>
+    <label for="valorParceria">Valor Total (R$):</label>
+    <input type="number" id="valorParceria" placeholder="Ex: 10000">
+    <button onclick="calcular('parceria')">Calcular</button>
+    <div class="resultado" id="resultadoParceria"></div>
+  </div>
+
+  <script>
+    function calcular(tipo) {
+      let valorTotal, porcentProprio, porcentTerceiro, resultadoDiv;
+
+      if (tipo === 'incentivo') {
+        valorTotal = parseFloat(document.getElementById('valorIncentivo').value);
+        porcentProprio = 72.8;
+        porcentTerceiro = 27.2;
+        resultadoDiv = document.getElementById('resultadoIncentivo');
+      } else if (tipo === 'agro') {
+        valorTotal = parseFloat(document.getElementById('valorAgro').value);
+        porcentProprio = 75.64;
+        porcentTerceiro = 24.36;
+        resultadoDiv = document.getElementById('resultadoAgro');
+      } else if (tipo === 'ateg') {
+        valorTotal = parseFloat(document.getElementById('valorAteg').value);
+        porcentProprio = 60;
+        porcentTerceiro = 40;
+        resultadoDiv = document.getElementById('resultadoAteg');
+      } else if (tipo === 'parceria') {
+        valorTotal = parseFloat(document.getElementById('valorParceria').value);
+        porcentProprio = 50;
+        porcentTerceiro = 50;
+        resultadoDiv = document.getElementById('resultadoParceria');
+      }
+
+      if (isNaN(valorTotal)) {
+        resultadoDiv.innerText = "Por favor, digite um valor válido.";
+        return;
+      }
+
+      const valorProprio = valorTotal * (porcentProprio / 100);
+      const valorTerceiro = valorTotal * (porcentTerceiro / 100);
+
+      resultadoDiv.innerHTML = `
+        Valor Próprio: R$ ${valorProprio.toFixed(2).replace('.', ',')}<br>
+        Valor Terceiro: R$ ${valorTerceiro.toFixed(2).replace('.', ',')}
+      `;
+    }
+  </script>
+
+</body>
+</html>
